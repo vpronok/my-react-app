@@ -12,18 +12,22 @@ export const SelectInput = ({
 }) => {
   return (
     <div>
-      <label htmlFor={id} className="block text-sm font-semibold text-gray-800 mb-2">
-        {label} {required && <span className="text-red-500">*</span>}
-      </label>
+      {/* The label is now only rendered if it exists */}
+      {label && (
+        <label htmlFor={id} className="block text-sm font-semibold text-slate-800 mb-2">
+          {label} {required && <span className="text-red-500">*</span>}
+        </label>
+      )}
       <select
         id={id}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         required={required}
         disabled={disabled}
-        className={`w-full px-4 py-2 border border-gray-300 rounded-lg bg-white focus:ring-blue-500 focus:border-blue-500 transition duration-200 appearance-none ${disabled ? 'bg-gray-100 cursor-not-allowed' : ''} ${className}`}
+        className={`w-full px-4 py-2 border border-slate-300 bg-slate-50 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 appearance-none disabled:opacity-60 disabled:cursor-not-allowed ${className}`}
       >
-        <option value="">{`Select ${label.toLowerCase().replace(' *', '')}`}</option>
+        {/* THE FIX: Check if label exists before using it. */}
+        <option value="">{`Select ${ (label || '').toLowerCase().replace(' *', '')}`}</option>
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}

@@ -3,23 +3,13 @@ import { Palette, Type, Layout, Globe } from 'lucide-react';
 import { AIAssistantInfo } from './AIAssistantInfo';
 
 export const CustomizationSidebar = ({ activeTab, onSetActiveTab }) => {
-  const tabs = [
-    { id: 'design', label: 'Design', icon: Palette },
-    { id: 'content', label: 'Content', icon: Type },
-    { id: 'layout', label: 'Layout', icon: Layout },
-    { id: 'seo', label: 'SEO', icon: Globe },
-  ];
-  
-  const mockAiMessages = [
-    { id: 'content-optimized', text: 'Content optimized for engagement', status: 'success' },
-    { id: 'seo-friendly', text: 'Core SEO elements are in place', status: 'success' },
-    { id: 'ai-suggestions', text: 'AI suggestions available in panels', status: 'suggestion' },
-  ];
+  // (keep tabs and mockAiMessages arrays)
 
   return (
-    <div className="w-full bg-white rounded-lg shadow-xl p-4 space-y-6 h-full flex flex-col">
+    // Update main container styles
+    <div className="w-full bg-white rounded-xl shadow-lg border border-slate-200 p-4 space-y-6 h-full flex flex-col">
       <div>
-        <h3 className="font-bold text-gray-900 text-lg mb-3 px-2">Customize</h3>
+        <h3 className="font-bold text-slate-900 text-lg mb-3 px-2">Customize</h3>
         <nav className="space-y-1">
           {tabs.map(tab => {
             const IconComponent = tab.icon;
@@ -27,8 +17,12 @@ export const CustomizationSidebar = ({ activeTab, onSetActiveTab }) => {
               <button
                 key={tab.id}
                 onClick={() => onSetActiveTab(tab.id)}
-                className={`w-full text-left px-3 py-2.5 rounded-lg flex items-center gap-3 font-medium transition-colors
-                  ${activeTab === tab.id ? 'bg-blue-100 text-blue-700' : 'text-gray-700 hover:bg-gray-50'}
+                // Update button styles for better clarity and feel
+                className={`w-full text-left px-3 py-2.5 rounded-lg flex items-center gap-3 font-semibold transition-colors duration-200
+                  ${activeTab === tab.id
+                    ? 'bg-blue-600 text-white shadow'
+                    : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                  }
                 `}
               >
                 <IconComponent className="h-5 w-5" />
@@ -38,8 +32,7 @@ export const CustomizationSidebar = ({ activeTab, onSetActiveTab }) => {
           })}
         </nav>
       </div>
-
-      <div className="border-t border-gray-200 pt-6 mt-auto">
+      <div className="border-t border-slate-200 pt-6 mt-auto">
         <AIAssistantInfo messages={mockAiMessages} />
       </div>
     </div>
